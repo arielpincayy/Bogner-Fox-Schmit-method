@@ -1,0 +1,7 @@
+h = 0.2
+k = 0.2
+x_min = -3
+y_min = -3
+x_range = [-3,3]
+y_range = [-3,3]
+points = load('points.txt')
