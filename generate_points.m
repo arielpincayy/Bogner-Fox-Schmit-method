@@ -1,4 +1,4 @@
-function M = generate_points(num_points, x_range, y_range, func, Nx, Ny)
+function M = generate_points(x_range, y_range, func, Nx, Ny)
     x_min = x_range(1);
     x_max = x_range(2);
     y_min = y_range(1);

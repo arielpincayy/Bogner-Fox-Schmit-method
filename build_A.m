@@ -1,4 +1,4 @@
-function A = build_A(h, k, x_range, y_range, points)
+function A = build_A(Nx, Ny, x_range, y_range, points)
     phi = load('coeficients.txt')';
     xy = points(:,1:2);
 
@@ -7,9 +7,8 @@ function A = build_A(h, k, x_range, y_range, points)
     x_max = x_range(2);
     y_max = y_range(2);
 
-    %Calcula el numero de nodos en la malla
-    Nx = floor((x_max - x_min) / h) + 1;
-    Ny = floor((y_max - y_min) / k) + 1;
+    h = (x_max - x_min) / Nx;
+    k = (y_max - y_min) / Ny;
 
     m = size(points,1);
     n = Nx*Ny;
