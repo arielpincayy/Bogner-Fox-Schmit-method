@@ -1,7 +1,10 @@
-h = 0.2
-k = 0.2
-x_min = -3
-y_min = -3
-x_range = [-3,3]
-y_range = [-3,3]
-points = load('points.txt')
+Nx = 25;
+Ny = 25;
+Nx_points = 30;
+Ny_points = 30;
+x_range = [-3,3];
+y_range = [-3,3];
+func = @(x,y)sin(x).*sin(y);
+generate_points(x_range, y_range, func, Nx_points, Ny_points);
+points = load('points.txt');
+mesh = bogner_fox_schmit(Nx, Ny, x_range, y_range, points)

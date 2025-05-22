@@ -10,8 +10,9 @@ function mesh = bogner_fox_schmit(Nx, Ny, x_range, y_range, points)
     n = Nx*Ny;
 
     A = build_A(Nx, Ny,x_range, y_range, points);
+    S = build_S(Nx, Ny, x_range, y_range);
     F = points(:,3);
-    alpha = (A' * A) \ (A' * F);
+    alpha = ((A' * A) + 0.00*(S)) \ (A' * F);
 
     mesh = zeros(m,1);
 
@@ -22,6 +23,7 @@ function mesh = bogner_fox_schmit(Nx, Ny, x_range, y_range, points)
     for i=1:m
         x = points(i,1);
         y = points(i,2);
+        
 
         %Calcula la posicion del nodo perteneciente al punto 0 del rectangulo
         [x0, y0] = find_rectangle(x, y, h, k, x_min, y_min);
@@ -70,23 +72,32 @@ function mesh = bogner_fox_schmit(Nx, Ny, x_range, y_range, points)
         end
     end
 
+    Nx_points = int32(sqrt(m));
+    Ny_points = int32(sqrt(m));
+
     figure(1);
-    X = reshape(points(:,1), Ny, Nx);
-    Y = reshape(points(:,2), Ny, Nx);
-    Z = reshape(mesh, Ny, Nx);
+    X = reshape(points(:,1), Ny_points, Nx_points);
+    Y = reshape(points(:,2), Ny_points, Nx_points);
+    Z = reshape(mesh, Ny_points, Nx_points);
     surf(X, Y, Z);
     shading interp;
     xlabel('x'); ylabel('y'); zlabel('z');
     title('Bogner Scmit Approximation');
 
     figure(2);
-    X = reshape(points(:,1), Ny, Nx);
-    Y = reshape(points(:,2), Ny, Nx);
-    Z = reshape(points(:,3), Ny, Nx);
+    X = reshape(points(:,1), Ny_points, Nx_points);
+    Y = reshape(points(:,2), Ny_points, Nx_points);
+    Z = reshape(points(:,3), Ny_points, Nx_points);
     surf(X, Y, Z);
     shading interp;
     xlabel('x'); ylabel('y'); zlabel('z');
     title('Original Function');
+
+    figure(3);
+    %Sacatterplot de los puntos por Bogner Fox Schmit
+    scatter3(points(:,1), points(:,2), mesh, 10, 'filled');
+    xlabel('x'); ylabel('y'); zlabel('z');
+    title('Bogner Fox Schmit Approximation');
 
 end
 
