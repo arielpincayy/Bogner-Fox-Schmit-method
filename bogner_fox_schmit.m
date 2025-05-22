@@ -12,7 +12,7 @@ function mesh = bogner_fox_schmit(Nx, Ny, x_range, y_range, points)
     A = build_A(Nx, Ny,x_range, y_range, points);
     S = build_S(Nx, Ny, x_range, y_range);
     F = points(:,3);
-    alpha = ((A' * A) + 0.00*(S)) \ (A' * F);
+    alpha = ((A' * A) + 0.0*(S)) \ (A' * F);
 
     mesh = zeros(m,1);
 

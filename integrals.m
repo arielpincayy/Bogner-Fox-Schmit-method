@@ -16,7 +16,7 @@ function value = integrals(h,k,coefs_l,coefs_r)
                         frag2 = frag2 + (1/k^3)*(prod_coefs((il+1),(jl+1),(ir+1),(jr+1)) * (jl*jr)*(jl-1)*(jr-1))/((jl + jr - 3)*(il + ir + 1));
                     end
                     if il>=1 && ir>=1 && jl>=1 && jr>=1
-                        frag3 = frag3 + (2/(h*k))*(prod_coefs((il+1),(jl+1),(ir+1),(jr+1)) * (il+1)*(ir+1)*(jl+1)*(jr+1))/((il + ir - 1)*(jl + jr - 1));
+                        frag3 = frag3 + (2/(h*k))*(prod_coefs((il+1),(jl+1),(ir+1),(jr+1)) * (il)*(ir)*(jl)*(jr))/((il + ir - 1)*(jl + jr - 1));
                     end
                 end
             end
