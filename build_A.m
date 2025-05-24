@@ -7,8 +7,8 @@ function A = build_A(Nx, Ny, x_range, y_range, points)
     x_max = x_range(2);
     y_max = y_range(2);
 
-    h = (x_max - x_min) / Nx;
-    k = (y_max - y_min) / Ny;
+    h = (x_max - x_min) / (Nx - 1);
+    k = (y_max - y_min) / (Ny - 1);
 
     m = size(points,1);
     n = Nx*Ny;
@@ -26,18 +26,11 @@ function A = build_A(Nx, Ny, x_range, y_range, points)
         %Calcula la posicion del nodo perteneciente al punto 0 del rectangulo
         Ni = floor((x0 - x_min)/h) + 1;
         Nj = floor((y0 - y_min)/k) + 1;
-
-        %Calcula las coordenadas de los vertices del rectangulo
-        verts = [x0, y0; x0, y0+k; x0+h, y0+k; x0+h, y0];
         
         %Define el movimiento de los vertices respecto al centro del rectangulo
         movs = [0, 0; 0, 1; 1, 1; 1, 0];
 
         for j=1:4
-
-            %Calcula las coordenadas del vertice del rectangulo
-            x_ = verts(j,1);
-            y_ = verts(j,2);
 
             %Calcula el indice del vertice en la matriz de stencil
             Ni_ = Ni + movs(j,1);
@@ -56,8 +49,8 @@ function A = build_A(Nx, Ny, x_range, y_range, points)
             for l=1:4
                 coefs = phi((j-1)*4 + l, :);
                 %Traslada al rectangulo referencia
-                xi = (x - x_) / h;
-                eta = (y - y_) / k;
+                xi = (x - x0) / h;
+                eta = (y - y0) / k;
                 %Evalua la funcion base local, y suma a la funcion base global
                 pol = eval_polin(coefs, xi, eta);
                 %Suma el resultado a la matriz global

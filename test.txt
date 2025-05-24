@@ -1,10 +1,10 @@
-Nx = 10;
-Ny = 10;
-Nx_points = 10;
-Ny_points = 10;
-x_range = [-3,3];
-y_range = [-3,3];
-func = @(x,y)sin(x).*sin(y);
-generate_points(x_range, y_range, func, Nx_points, Ny_points);
+Nx =  20;
+Ny =  20;
+x_range = [0,1];
+y_range = [0,1];
+epsilon = 1e-6;
+num_points = 4;
+func = @(x,y)sin(pi*x).*sin(pi*y);
+generate_points(x_range, y_range, func, Nx, Ny, num_points);
 points = load('points.txt');
-mesh = bogner_fox_schmit(Nx, Ny, x_range, y_range, points)
+[mesh, A, S] = bogner_fox_schmit(Nx, Ny, x_range, y_range, points, epsilon);
